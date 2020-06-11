@@ -1,0 +1,29 @@
+body,
+html,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#{headings(1,6)} {
+  margin: 0;
+}

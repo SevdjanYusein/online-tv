@@ -1,0 +1,31 @@
+worker_processes  2;
+
+events {
+   worker_connections  1024;
+   use epoll;
+}
+
+http {
+   server_tokens off;
+   include  /etc/nginx/mime.types;
+
+   server {
+       listen 80 default_server;
+       server_name _;
+
+       return 301 https://$host$request_uri;
+   }
+   server {
+       listen 443 default_server;
+       server_name _;
+
+       ssl on;
+       ssl_certificate /etc/ssl/certs/star.{{ ssl_domain }}.chained.crt;
+       ssl_certificate_key /etc/ssl/private/star.{{ ssl_domain }}.key;
+
+       location / {
+           root   {{ project_root }};
+           try_files $uri /index.html;
+       }
+   }
+}

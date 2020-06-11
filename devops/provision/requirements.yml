@@ -1,0 +1,9 @@
+# Vagrant/Ansible Project
+
+- src: git+ssh://git@bitbucket.upnetix.com:7999/devops/ansible-role-common.git
+  name: upnetix.common
+  version: 1.0.2
+
+- src: git+ssh://git@bitbucket.upnetix.com:7999/devops/ansible-role-nginx.git
+  name: upnetix.nginx
+  version: 1.0.2

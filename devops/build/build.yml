@@ -1,0 +1,26 @@
+# Vagrant/Ansible Project
+
+- hosts: buildservers, webservers
+  become: true
+#  gather_facts: no
+
+  pre_tasks:
+    - debug:
+        msg: "Run on server: {{ ansible_host }}"
+      tags:
+      - always
+
+  vars_files:
+    - ../env/shared-vars.yml
+    - vars/main.yml
+
+  roles:
+    - role: upnetix.common
+      tags:
+      - provision
+    - role: upnetix.nodejs
+      tags:
+      - provision
+    - role: build
+      tags:
+      - build

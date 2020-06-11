@@ -1,0 +1,14 @@
+# Vagrant/Ansible Project
+
+- hosts: webservers, homeservers
+  become: true
+
+  pre_tasks:
+    - debug:
+        msg: "Run on server: {{ ansible_host }}"
+
+  vars_files:
+    - ../env/shared-vars.yml
+
+  roles:
+    - deploy

@@ -1,0 +1,5 @@
+# we define hosts with name, so we can define variables
+# with variable="{{ hostvars['db_server'].ansible_host }}"
+
+[webservers]
+web_server ansible_host={{projectHost}} ansible_port=22

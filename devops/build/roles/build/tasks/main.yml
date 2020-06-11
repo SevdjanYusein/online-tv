@@ -1,0 +1,10 @@
+# Build project
+
+- name: Build project (run react-scripts build)
+  command: "{{ npm_config_prefix }}/bin/react-scripts build"
+  args:
+    chdir: "{{ project_root }}/project"
+  environment:
+      NPM_CONFIG_PREFIX: "{{ npm_config_prefix }}"
+      NODE_PATH: "{{ npm_config_prefix }}/lib/node_modules"
+      NPM_CONFIG_UNSAFE_PERM: "{{ npm_config_unsafe_perm }}"

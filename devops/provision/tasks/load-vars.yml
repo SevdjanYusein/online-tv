@@ -1,0 +1,12 @@
+- name: Include shared vault vars
+  include_vars:
+    file: "{{ inventory_dir }}/../shared-vault.yml"
+    name: shared_vault
+
+- name: Include shared vars
+  include_vars: "{{ inventory_dir }}/../shared-vars.yml"
+
+- name: Include env vault vars
+  include_vars:
+    file: "{{ inventory_dir }}/vault.yml"
+    name: vault

@@ -1,0 +1,13 @@
+---
+project_url: "{{ project_name }}..upnetix.cloud"
+
+app_env: live
+
+ssl_domain: upnetix.cloud
+
+remote_user: ubuntu
+
+web_host: "{{ hostvars['web_server'].ansible_host }}"
+
+session_host: localhost # "{{ hostvars['web_server'].ansible_host }}"
+session_listen_ip: 127.0.0.1 # "{{ hostvars['web_server'].ansible_host }}"

@@ -1,0 +1,91 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "order/order": [
+      "custom-properties",
+      "declarations"
+    ],
+    "order/properties-order": [
+      [
+      "position",
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "z-index",
+      "display",
+      "visibility",
+      "float",
+      "width",
+      "height",
+      "line-height",
+      "overflow",
+      "margin",
+      "margin-top",
+      "margin-right",
+      "margin-bottom",
+      "margin-left",
+      "padding",
+      "padding-top",
+      "padding-right",
+      "padding-bottom",
+      "padding-left",
+      "color",
+      {
+        order: "flexible",
+        properties: [
+          "font-family",
+          "font-size",
+          "font-weight",
+          "font-style",
+          "font-variant",
+          "font-stretch",
+          "font-size-adjust",
+          "@font-face"
+        ]
+      },
+      {
+        order: "flexible",
+        properties: [
+          "text-align",
+          "text-decoration",
+          "text-indent",
+          "text-justify",
+          "text-outline",
+          "text-overflow",
+          "text-shadow",
+          "text-transform",
+          "text-wrap"
+        ]
+      },
+      "direction",
+      "letter-spacing",
+      "white-space",
+      "word-spacing",
+      "list-style-type",
+      "clear",
+      "cursor",
+      "background",
+      "background-image",
+      "background-repeat",
+      "background-size",
+      "background-color",
+      "background-position",
+      "background-attachment",
+      "border",
+      "border-top",
+      "border-right",
+      "border-bottom",
+      "border-left",
+      "border-radius",
+      "opacity"
+      ],
+      {
+        unspecified: "ignore"
+      }
+    ]
+  }
+}

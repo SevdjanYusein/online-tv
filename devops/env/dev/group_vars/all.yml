@@ -1,0 +1,13 @@
+---
+project_url: "{{ ansible_host }}"
+
+app_env: dev
+
+ssl_domain: upnetix.tech
+
+remote_user: vagrant
+
+web_host: "{{ hostvars['web_server'].ansible_host }}"
+
+session_host: "{{ hostvars['web_server'].ansible_host }}"
+session_listen_ip: "{{ hostvars['web_server'].ansible_host }}"

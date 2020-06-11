@@ -1,0 +1,15 @@
+---
+project_url: "test-{{ project_name }}.upnetix.tech"
+
+app_env: test
+
+ssl_domain: upnetix.tech
+
+remote_user: ubuntu
+
+web_host: "{{ hostvars['web_server'].ansible_host }}"
+
+session_host: localhost # "{{ hostvars['web_server'].ansible_host }}"
+session_listen_ip: 127.0.0.1 # "{{ hostvars['web_server'].ansible_host }}"
+
+nginx_conf_template: "{{ playbook_dir }}/../templates/nginx_as_web_server.conf.j2"

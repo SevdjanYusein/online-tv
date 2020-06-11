@@ -1,0 +1,18 @@
+# Deploy project
+# Vagrant/Ansible Project
+
+- name: Deploy code to remote machine
+  synchronize:
+    src: "{{ playbook_dir }}/../../project/build/"
+    dest: "{{ project_root }}"
+    checksum: yes
+    delete: yes
+    recursive: yes
+    verify_host: false
+    rsync_opts:
+      - "--chown=www-data:www-data"
+  register: rsync_result
+
+- name: View synced files
+  debug:
+    var: rsync_result.stdout_lines

@@ -1,0 +1,15 @@
+build_host: "build-sy-{{ project_name }}.upnetix.tech"
+
+nodejs_version: "10.x"
+nodejs_install_npm_user: "vagrant"
+
+npm_config_prefix: "/home/vagrant/.npm-global"
+npm_config_unsafe_perm: "true"
+
+nodejs_npm_global_packages:
+  - name: node-sass
+    version: 4.11.0
+  - name: react-scripts
+    version: 2.1.8
+
+nodejs_package_json_path: "{{ project_root }}/project"

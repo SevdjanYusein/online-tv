@@ -1,0 +1,10 @@
+# Vagrant/Ansible Project
+
+- hosts: all
+  pre_tasks:
+     - include_tasks: tasks/load-vars.yml
+     - name: Load vars
+       set_fact:
+          vars_loaded: true
+
+- import_playbook: playbooks/webservers.yml

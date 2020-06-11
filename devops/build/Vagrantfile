@@ -1,0 +1,51 @@
+# Vagrant/Ansible Project
+
+require 'yaml'
+
+settings = YAML.load_file '../env/shared-vars.yml'
+buildFolder = ENV.has_key?('BUILD_ENV') ? '../../' + ENV['BUILD_ENV'] + '/': settings['project_folder']
+
+projectHost =  'build-sy-' + settings['project_name'].gsub(/\./, '-') + '.upnetix.tech'
+
+Vagrant.configure('2') do |config|
+  config.ssh.forward_agent = true
+  config.ssh.insert_key = false
+#  config.ssh.verify_host_key = :never
+
+  config.vm.box = 'geerlingguy/ubuntu1604'
+  config.vm.guest = :ubuntu
+
+  config.vm.hostname = "#{projectHost}"
+  config.vm.network "public_network",
+      use_dhcp_assigned_default_route: true,
+      :mac => "080027"+String(Digest::MD5.hexdigest "#{projectHost}").slice(1, 6),
+      :bridge => `ip ro ls | grep default | sort -k 9 | head -n 1 | awk '{print $5}' | tr -d "\n"`
+
+  config.vm.provider :virtualbox do |vb|
+    vb.cpus = 2
+    vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    vb.memory = 1024
+    vb.name = "#{projectHost}"
+    vb.linked_clone = true
+  end
+
+  config.vm.provision 'ansible' do |ansible|
+    ansible.config_file = 'ansible.cfg'
+    ansible.playbook = 'build.yml'
+    ansible.inventory_path = 'inventory'
+    ansible.galaxy_role_file = 'requirements.yml'
+    ansible.galaxy_roles_path = '~/.ansible/roles:../provision/roles'
+    ansible.limit = 'buildservers'
+
+#    ansible.ask_vault_pass = true
+    ansible.vault_password_file = '../provision/vault_pass'
+#    ansible.verbose = "vvv"
+
+    ansible.compatibility_mode = "2.0"
+  end
+
+  config.vm.synced_folder buildFolder, settings['project_root'],
+    owner: 'www-data',
+    group: 'www-data',
+    mount_options: ['dmode=775,fmode=664']
+end
